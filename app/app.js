@@ -275,18 +275,26 @@ document.getElementById("submitBtn").addEventListener("click", async function(ev
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: p1, password: p2 })
             });
-            // showLoader()
+            const text = await response.text(); // Récupère la réponse brute en texte
+            console.log('Réponse brute :', text); // Affiche la réponse brute dans la console
+
+            try {
+                const data = JSON.parse(text); // Tente de parser en JSON
+                console.log(data);
+            } catch (e) {
+                console.error('Erreur lors du parsing JSON:', e);
+            }
+            
             let result = await response.json();
             if (result.data) {
                 document.getElementById("result").textContent = "Valeur récupérée: " + result.data;
                 const timeString = result.data;
                 const formattedTime = timeString.split(':').slice(0, 2).join(':');
                 document.getElementById("heure").value = formattedTime;
-                // hideLoader()
+                
                 Start()
 
             } else {
-                // hideLoader()
                 document.getElementById("result").textContent = "Aucune donnée trouvée.";
             }
             document.getElementById("modal_load").style.display = "none";
