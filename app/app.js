@@ -292,6 +292,7 @@ document.getElementById("submitBtn").addEventListener("click", async function(ev
         } catch (error) {
             console.error("Error:", error);
             document.getElementById("result").textContent = "Erreur lors de la récupération.";
+            document.getElementById("modal_load").style.display = "none";
         }
     } else {
         alert("Both fields must be filled and contain more than 5 characters.");
