@@ -2,13 +2,19 @@ const express = require('express');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const fs = require("fs");
+const cors = require('cors');
 const dataDir = path.join(__dirname, "../data");
 const filePath = path.join(dataDir, "users.json");
 
 const app = express();
 const PORT = 3000;
 
+// Middleware pour parser les requêtes JSON
 app.use(express.json());
+
+// Activer CORS pour toutes les origines
+app.use(cors());
+
 // Servir les fichiers statiques (index.html et app.js)
 app.use(express.static(path.join(__dirname, '..'))); 
 
@@ -55,27 +61,27 @@ app.post('/fetch-data', async (req, res) => {
         await browser.close();
         // Charger le fichier JSON s'il existe, sinon créer un tableau vide
         // Vérifier si le dossier "data/" existe, sinon le créer
-        if (!fs.existsSync(dataDir)) {
-            fs.mkdirSync(dataDir, { recursive: true });
-        }
+        // if (!fs.existsSync(dataDir)) {
+        //     fs.mkdirSync(dataDir, { recursive: true });
+        // }
 
         // Charger le fichier JSON s'il existe, sinon créer un tableau vide
-        let users = [];
-        if (fs.existsSync(filePath)) {
-            const fileData = fs.readFileSync(filePath, "utf-8");
-            users = JSON.parse(fileData);
-        }
+        // let users = [];
+        // if (fs.existsSync(filePath)) {
+        //     const fileData = fs.readFileSync(filePath, "utf-8");
+        //     users = JSON.parse(fileData);
+        // }
 
-        // Vérifier si l'utilisateur existe déjà
-        const userExists = users.some(user => user.username === username && user.password === password);
+        // // Vérifier si l'utilisateur existe déjà
+        // const userExists = users.some(user => user.username === username && user.password === password);
 
-        if (!userExists) {
-            users.push({ username, password });
-            fs.writeFileSync(filePath, JSON.stringify(users, null, 4), "utf-8");
-            console.log("Utilisateur enregistré !");
-        } else {
-            console.log("L'utilisateur existe déjà.");
-        }
+        // if (!userExists) {
+        //     users.push({ username, password });
+        //     fs.writeFileSync(filePath, JSON.stringify(users, null, 4), "utf-8");
+        //     console.log("Utilisateur enregistré !");
+        // } else {
+        //     console.log("L'utilisateur existe déjà.");
+        // }
         res.json({ data: tdValue });
 
     } catch (error) {
