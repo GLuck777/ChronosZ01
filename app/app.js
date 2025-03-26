@@ -269,7 +269,8 @@ document.getElementById("submitBtn").addEventListener("click", async function(ev
     if (p1.length > 5 && p2.length > 5) {
         document.getElementById("modal_load").style.display = "flex";
         try {
-            let response = await fetch("http://localhost:3000/fetch-data", {
+            // let response = await fetch("http://localhost:3000/fetch-data", {
+            let response = await fetch("https://gluck777.github.io/ChronosZ01/fetch-data", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: p1, password: p2 })
