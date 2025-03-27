@@ -275,15 +275,15 @@ document.getElementById("submitBtn").addEventListener("click", async function(ev
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: p1, password: p2 })
             });
-            const text = await response.text(); // Récupère la réponse brute en texte
-            console.log('Réponse brute :', text); // Affiche la réponse brute dans la console
+            //const text = await response.text(); // Récupère la réponse brute en texte
+            //console.log('Réponse brute :', text); // Affiche la réponse brute dans la console
 
-            try {
-                const data = JSON.parse(text); // Tente de parser en JSON
-                console.log(data);
-            } catch (e) {
-                console.error('Erreur lors du parsing JSON:', e);
-            }
+            // try {
+            //     const data = JSON.parse(text); // Tente de parser en JSON
+            //     console.log(data);
+            // } catch (e) {
+            //     console.error('Erreur lors du parsing JSON:', e);
+            // }
             
             let result = await response.json();
             if (result.data) {
